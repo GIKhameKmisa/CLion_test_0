@@ -1,19 +1,15 @@
 #include <stdio.h>
 
 int main() {
-    char pint[100];
-    char *p1 = pint;
-    printf("请输入一个英文句子");
-    scanf("%[^\n]", pint);
-    char temp;
-    while (1) {
-        temp = *p1++;
-        if (temp == 'i') {
-        } else if (temp == '\0') {
-            printf("%c", temp);
-            break;
-        } else {
-            printf("%c", temp);
-        }
-    }
+    int num = 520;
+    const int cnum = 880;
+    const int *pc = &cnum;
+
+    printf("cnum: %d, &cnum: %p\n", cnum, &cnum);
+    printf("*pc: %d, pc: %p\n", *pc, pc);
+
+//    *pc = 1024;  // 尝试修改 *pc 的值，报错
+    printf("*pc: %d\n", *pc);
+
+    return 0;
 }
