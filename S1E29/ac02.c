@@ -21,15 +21,54 @@ char *myitoa(int num, char *str);
 
 int main() {
     int num;
-    num = myprintf("%d", 13213);
-    myprintf("%d", num);
+    num = myprintf(" num = %d", -13);
+    myprintf(" count = %d", num);
+
+    return 0;
 }
 
 int myprintf(const char *format, ...) {
     va_list vap;
     va_start(vap, format);
-    int i;
-    if (format[1] == 'd') {
+    int i = 0; // format
+    int count = 0; // str
+    // 如果不是格式换位符则直接输出 注意format也是一个字符串
+    while (format[i] != '\0') {
+        if (format[i] != '%') {
+            putchar(format[i]);
+            i++;
+        } else {
+            switch (format[i + 1]) {
+                case 'c': {
+                    count = 1;
+                    putchar(va_arg(vap, int));
+                    break;
+                }
+                case 'd': {
+                    count = 0;
+                    char str[10];
+                    myitoa(va_arg(vap, int), str);
+                    while (str[count] != '\0') {
+                        putchar(str[count]);
+                        count++;
+                    }
+                    break;
+                }
+                case 's': {
+                    count = 0;
+                    char *str = va_arg(vap, char *);
+                    while (*(str + count) != '\0') {
+                        putchar(*(str + count));
+                        count++;
+                    }
+                    break;
+                }
+            }
+            i += 2;
+        }
+    }
+
+    /*if (format[1] == 'd') {
         i = 0;
         char str[10];
         myitoa(va_arg(vap, int), str);
@@ -48,9 +87,9 @@ int myprintf(const char *format, ...) {
         while (*(str + i) != '\0') {
             putchar(*(str + i));
         }
-    }
+    }*/
     va_end(vap);
-    return i;
+    return count;
 }
 
 char *myitoa(int num, char *str) {
