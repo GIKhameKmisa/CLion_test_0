@@ -1,15 +1,8 @@
 #include <stdio.h>
-#include <stdarg.h>
 
-void test(const char *str, ...);
 
 int main() {
-    test("%c", 'q');
+    printf("%02x", 10);
 }
 
-void test(const char *str, ...) {
-    va_list vap;
-    va_start(vap, str);
-    putchar(va_arg(vap, int));
-    va_end(vap);
-}
+
