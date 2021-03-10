@@ -1,13 +1,11 @@
+#include "md5.h"
 #include <stdio.h>
 #include <string.h>
-#include "md5.h"
 
 void md5(unsigned char *dest, unsigned char *src);
 
 void md5(unsigned char *dest, unsigned char *src)
 {
-    int i;
-
     MD5_CTX md5;
 
     // 初始化
